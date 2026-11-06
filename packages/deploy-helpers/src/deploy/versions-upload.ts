@@ -26,7 +26,10 @@ import {
 	type BundleSize,
 } from "./helpers/bundle-reporter";
 import { getContainerMetadata } from "./helpers/container-metadata";
-import { createWorkerUploadForm } from "./helpers/create-worker-upload-form";
+import {
+	createWorkerUploadForm,
+	WORKER_UPLOAD_SCRIPT_API_DATE,
+} from "./helpers/create-worker-upload-form";
 import {
 	deployDurableObjectContainerApplications,
 	prepareDurableObjectContainerApplications,
@@ -359,9 +362,11 @@ async function uploadWorkerVersion(
 						{
 							method: "POST",
 							body: workerBundle,
-							headers: props.sendMetrics
-								? { metricsEnabled: "true" }
-								: undefined,
+							headers: {
+								"Cloudflare-Workers-Script-Api-Date":
+									WORKER_UPLOAD_SCRIPT_API_DATE,
+								...(props.sendMetrics && { metricsEnabled: "true" }),
+							},
 						},
 						new URLSearchParams({ bindings_inherit: "strict" })
 					),

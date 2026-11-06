@@ -20,6 +20,9 @@ import type {
 	WorkerMetadataBinding,
 } from "@cloudflare/workers-utils";
 
+// Sent as `Cloudflare-Workers-Script-Api-Date`: `workflow` exports in the metadata carry their settings.
+export const WORKER_UPLOAD_SCRIPT_API_DATE = "2026-11-09";
+
 export const moduleTypeMimeType: {
 	[type in CfModuleType]: string | undefined;
 } = {

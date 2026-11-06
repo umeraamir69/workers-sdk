@@ -20,14 +20,7 @@ export async function resolveExportsUploadPayload(
 	const exports: NonNullable<CfWorkerInit["exports"]> = {
 		...partitionedExports.worker,
 		...(durableObjectExports ?? {}),
-		// Workflow settings are applied when `triggers deploy` provisions the
-		// Workflow; the upload API only accepts the type and name.
-		...Object.fromEntries(
-			Object.entries(partitionedExports.workflow).map(
-				([className, { name }]) =>
-					[className, { type: "workflow", name }] as const
-			)
-		),
+		...partitionedExports.workflow,
 	};
 
 	return {
