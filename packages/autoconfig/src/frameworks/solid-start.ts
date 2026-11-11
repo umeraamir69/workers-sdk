@@ -1,5 +1,3 @@
-import { existsSync } from "node:fs";
-import { join } from "node:path";
 import { updateStatus } from "@cloudflare/cli-shared-helpers";
 import { blue } from "@cloudflare/cli-shared-helpers/colors";
 import {
@@ -48,7 +46,10 @@ export class SolidStart extends Framework {
 
 			return {
 				buildTool: "vite",
-				workerConfig: { entrypoint: getServerEntrypoint(projectPath) },
+				workerConfig: {
+					// SolidStart resolves this alias to its server entry, wherever `appRoot` puts it
+					entrypoint: "@solidjs/start/server/entry",
+				},
 			};
 		}
 
@@ -73,20 +74,6 @@ export class SolidStart extends Framework {
 			buildConfig: { assetsDirectory: "./.output/public" },
 		};
 	}
-}
-
-/**
- * Finds SolidStart's server entry, which the Worker runs.
- *
- * @param projectPath The path of the project
- * @returns The path of the server entry, relative to the project
- */
-function getServerEntrypoint(projectPath: string): string {
-	return (
-		["./src/entry-server.tsx", "./src/entry-server.jsx"].find((entrypoint) =>
-			existsSync(join(projectPath, entrypoint))
-		) ?? `./src/entry-server.${usesTypescript(projectPath) ? "tsx" : "jsx"}`
-	);
 }
 
 /**

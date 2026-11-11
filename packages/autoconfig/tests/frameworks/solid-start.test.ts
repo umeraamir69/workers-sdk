@@ -57,7 +57,7 @@ describe("SolidStart", () => {
 
 		expect(result).toEqual({
 			buildTool: "vite",
-			workerConfig: { entrypoint: "./src/entry-server.tsx" },
+			workerConfig: { entrypoint: "@solidjs/start/server/entry" },
 		});
 		expect(readFileSync("vite.config.ts", "utf8")).toMatchInlineSnapshot(`
 			"import { defineConfig } from "vite";
@@ -86,7 +86,6 @@ describe("SolidStart", () => {
 		expect,
 	}) => {
 		await seed({
-			"src/entry-server.jsx": "export default {};",
 			"vite.config.js": dedent`
 				import { defineConfig } from "vite";
 				import { nitro } from "nitro/vite";
@@ -100,11 +99,8 @@ describe("SolidStart", () => {
 		});
 		const context = createMockContext();
 
-		const result = await configureForCf(context);
+		await configureForCf(context);
 
-		expect(result.workerConfig).toEqual({
-			entrypoint: "./src/entry-server.jsx",
-		});
 		expect(context.logger.warn).toHaveBeenCalledWith(
 			expect.stringContaining('exclude: ["@solidjs/start"]')
 		);
