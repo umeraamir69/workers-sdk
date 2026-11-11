@@ -1,5 +1,20 @@
 # wrangler
 
+## 4.160.2
+
+### Patch Changes
+
+- [#16833](https://github.com/cloudflare/workers-sdk/pull/16833) [`5f539b5`](https://github.com/cloudflare/workers-sdk/commit/5f539b5cbe73272db7e287a8b119dad1aa991c9c) Thanks [@jamesopstad](https://github.com/jamesopstad)! - Name `cf` commands and `cloudflare.config.ts` settings in remote bindings errors from `cf-wrangler`
+
+  When `cf` runs development through the `cf-wrangler` delegate and remote bindings cannot be authenticated, the error now tells you to run `cf auth whoami`, `cf auth logout` and `cf auth login` instead of the Wrangler commands, and the Cloudflare Access hint names cf. The Flagship error for a binding whose app has not been created now names the binding's `id` setting instead of `app_id`, and suggests `cf flagship apps create`. `wrangler dev` still names Wrangler's commands and settings.
+
+- [#16527](https://github.com/cloudflare/workers-sdk/pull/16527) [`dc47e6d`](https://github.com/cloudflare/workers-sdk/commit/dc47e6d2a061748f47dc9cfba66ed3cffe944754) Thanks [@petebacondarwin](https://github.com/petebacondarwin)! - Normalize relative redirect pathnames consistently across Pages and Workers assets
+
+  Relative `_redirects` targets now use shared pathname normalization after placeholder replacement, keeping repeated separators within the site's path. Explicit external targets (including scheme-less URLs such as `//example.com/path`), query values and fragments retain their contents.
+
+- Updated dependencies [[`dc47e6d`](https://github.com/cloudflare/workers-sdk/commit/dc47e6d2a061748f47dc9cfba66ed3cffe944754)]:
+  - miniflare@5.20261110.2-beta
+
 ## 4.160.1
 
 ### Patch Changes
