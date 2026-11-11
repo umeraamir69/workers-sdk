@@ -42,7 +42,7 @@ export class SolidStart extends Framework {
 					projectPath,
 					version: "^2.0.0-beta.v.0",
 				});
-				transformViteConfig(projectPath, { viteEnvironmentName: "ssr" });
+				transformViteConfig(projectPath);
 				excludeSolidStartFromServerPrebundling(projectPath, context);
 			}
 

@@ -67,11 +67,7 @@ describe("SolidStart", () => {
 
 			export default defineConfig({
 			  plugins: [solidStart(),
-			    cloudflare({
-			      viteEnvironment: {
-			        name: "ssr"
-			      }
-			    })
+			    cloudflare()
 			  ],
 
 			  environments: {
