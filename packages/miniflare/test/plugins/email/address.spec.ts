@@ -43,18 +43,18 @@ test("extractEmailAddress reads email from string or object", ({ expect }) => {
 	expect(extractEmailAddress({ email: "user@example.com" })).toBe(
 		"user@example.com"
 	);
-	expect(
-		extractEmailAddress({ name: "User", email: "user@example.com" })
-	).toBe("user@example.com");
+	expect(extractEmailAddress({ name: "User", email: "user@example.com" })).toBe(
+		"user@example.com"
+	);
 });
 
 test("formatParsedAddress omits empty display names", ({ expect }) => {
 	expect(formatParsedAddress({ address: "user@example.com" })).toBe(
 		"user@example.com"
 	);
-	expect(
-		formatParsedAddress({ name: "", address: "user@example.com" })
-	).toBe("user@example.com");
+	expect(formatParsedAddress({ name: "", address: "user@example.com" })).toBe(
+		"user@example.com"
+	);
 	expect(
 		formatParsedAddress({ name: "User", address: "user@example.com" })
 	).toBe('"User" <user@example.com>');
